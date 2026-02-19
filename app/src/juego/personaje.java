@@ -1,56 +1,59 @@
 package juego;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 public class personaje {
 
+    private String nombre;
     private String apodo;
     private String raza;
-    private int salud;
-    private int fuerza;
-    private int destreza;
     private int velocidad;
-    private int armadura;
+    private int destreza;
+    private int fuerza;
     private int nivel;
+    private int armadura;
+    private int salud;
+    private LocalDate fechaNacimiento;
+    private int edad;
 
-    public personaje(String apodo, String raza) {
+    public personaje(String nombre, String apodo, String raza, LocalDate fechaNacimiento) {
+        this.nombre = nombre;
         this.apodo = apodo;
         this.raza = raza;
-        this.salud = 100;
-        this.nivel = 1;
+        this.fechaNacimiento = fechaNacimiento;
+        this.edad = Period.between(fechaNacimiento, LocalDate.now()).getYears();
 
-        this.fuerza = 5 + (int)(Math.random() * 6);
-        this.destreza = 5 + (int)(Math.random() * 6);
-        this.velocidad = 5 + (int)(Math.random() * 6);
-        this.armadura = 5 + (int)(Math.random() * 6);
+        this.velocidad = 1 + (int)(Math.random() * 10);
+        this.destreza = 1 + (int)(Math.random() * 5);
+        this.fuerza = 1 + (int)(Math.random() * 10);
+        this.nivel = 1;
+        this.armadura = 1 + (int)(Math.random() * 10);
+        this.salud = 100;
     }
 
-    public void recibirdanio(int danio) {
+    public void recibirDanio(double danio) {
         salud -= danio;
         if (salud < 0) salud = 0;
     }
 
-    public void aumentarsalud(int cantidad) {
-        salud += cantidad;
+    public void mejorar() {
+        salud += 10;
+        nivel++;
         if (salud > 100) salud = 100;
     }
 
-    public void subirmivel() {
-        nivel++;
-        fuerza++;
-        destreza++;
-        velocidad++;
-        armadura++;
-    }
-
-    public boolean estavivo() {
+    public boolean estaVivo() {
         return salud > 0;
     }
 
-    public String getapodo() { return apodo; }
-    public String getraza() { return raza; }
-    public int getsalud() { return salud; }
-    public int getfuerza() { return fuerza; }
-    public int getdestreza() { return destreza; }
-    public int getvelocidad() { return velocidad; }
-    public int getarmadura() { return armadura; }
-    public int getnivel() { return nivel; }
+    public String getNombre() { return nombre; }
+    public String getApodo() { return apodo; }
+    public String getRaza() { return raza; }
+    public int getVelocidad() { return velocidad; }
+    public int getDestreza() { return destreza; }
+    public int getFuerza() { return fuerza; }
+    public int getNivel() { return nivel; }
+    public int getArmadura() { return armadura; }
+    public int getSalud() { return salud; }
 }

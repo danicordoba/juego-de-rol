@@ -6,37 +6,32 @@ public class combate {
 
     private Random random = new Random();
 
-    public void atacar(personaje atacante, personaje defensor) {
+    public double atacar(personaje atacante, personaje defensor) {
 
-        int pd = atacante.getdestreza() * atacante.getfuerza() * atacante.getnivel();
-        int ed = random.nextInt(100) + 1;
-        int va = pd * ed;
+        Random random = new Random();
 
-        int pdef = defensor.getarmadura() * defensor.getvelocidad();
+        // daño base entre 20 y 40
+        int danioBase = 20 + random.nextInt(21);
 
-        int danio = (va - pdef) / 1000;
-
-        if (danio <= 0) danio = 1;
-
-        if (atacante.getraza().equals("orco")) danio *= 1.1;
-        if (atacante.getraza().equals("elfo")) danio *= 1.05;
-
-        if (atacante.getraza().equals("humano") && random.nextInt(100) < 10) {
-            System.out.println("golpe critico!");
-            danio *= 2;
+        // ventaja simple por raza
+        if (atacante.getRaza().equalsIgnoreCase("orco") &&
+                defensor.getRaza().equalsIgnoreCase("humano")) {
+            danioBase += 10;
         }
 
-        defensor.recibirdanio(danio);
+        if (atacante.getRaza().equalsIgnoreCase("humano") &&
+                defensor.getRaza().equalsIgnoreCase("elfo")) {
+            danioBase += 10;
+        }
 
-        System.out.println(atacante.getraza()
-                + " ataca a "
-                + defensor.getraza()
-                + " y le quita "
-                + danio + " de vida.");
+        if (atacante.getRaza().equalsIgnoreCase("elfo") &&
+                defensor.getRaza().equalsIgnoreCase("orco")) {
+            danioBase += 10;
+        }
 
-        System.out.println("vida restante de "
-                + defensor.getraza()
-                + ": "
-                + defensor.getsalud() + "\n");
+        defensor.recibirDanio(danioBase);
+
+        return danioBase;
     }
+
 }

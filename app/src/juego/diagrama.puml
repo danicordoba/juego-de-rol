@@ -1,46 +1,33 @@
 @startuml
-
 class personaje {
-  - apodo : String
+  - nombre : String
   - raza : String
-  - salud : int
-  - fuerza : int
-  - destreza : int
-  - velocidad : int
-  - armadura : int
-  - nivel : int
-  + recibirdanio(int) : void
-  + aumentarsalud(int) : void
-  + subirmivel() : void
-  + estavivo() : boolean
+  - vida : int
+  - ataque : int
+  + estaVivo() : boolean
+  + recibirDanio(d:int) : void
+  + mejorar() : void
 }
 
 class combate {
-  + atacar(personaje, personaje) : void
+  + atacar(a:personaje, d:personaje) : double
 }
 
 class juego {
   - jugador1 : List<personaje>
   - jugador2 : List<personaje>
   - combate : combate
-  - nombreJugador1 : String
-  - nombreJugador2 : String
-  + iniciaraleatorio(Scanner) : void
-  + iniciarmanual(Scanner) : void
-  + jugar() : void
+  + iniciarAleatorio() : void
+  + iniciarManual() : void
+  - jugar() : void
 }
 
 class menu {
-  + mostrar() : void
+  - juego : juego
+  + iniciar() : void
 }
 
-class main {
-  + main(String[]) : void
-}
-
+juego "1" o-- "*" personaje
+juego "1" *-- "1" combate
 menu --> juego
-juego --> combate
-juego --> personaje
-main --> menu
-
 @enduml

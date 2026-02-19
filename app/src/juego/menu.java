@@ -4,48 +4,34 @@ import java.util.Scanner;
 
 public class menu {
 
-    private Scanner scanner = new Scanner(System.in);
-    private juego juego = new juego();
-
     public void mostrar() {
 
-        int opcion = 0;
+        Scanner sc = new Scanner(System.in);
+        juego juego = new juego();
+        int opcion;
 
-        while (opcion != 5) {
+        do {
+            System.out.println("\n====================================");
+            System.out.println("        MINI JUEGO DE ROL");
+            System.out.println("====================================");
+            System.out.println("1 - Iniciar partida (aleatorio)");
+            System.out.println("2 - Iniciar partida (manual)");
+            System.out.println("3 - Leer logs");
+            System.out.println("4 - Borrar logs");
+            System.out.println("5 - Salir");
+            System.out.println("====================================");
+            System.out.print("Elegí una opción: ");
 
-            System.out.println("\n==== mini juego de rol ====");
-            System.out.println("1 - iniciar partida (aleatorio)");
-            System.out.println("2 - iniciar partida (manual)");
-            System.out.println("3 - leer logs");
-            System.out.println("4 - borrar logs");
-            System.out.println("5 - salir");
-            System.out.print("elige una opcion: ");
-
-            opcion = scanner.nextInt();
-            scanner.nextLine();
+            opcion = sc.nextInt();
+            sc.nextLine();
 
             switch (opcion) {
-                case 1:
-                    juego.iniciaraleatorio(scanner);
-                    break;
-
-                case 2:
-                    juego.iniciarmanual(scanner);
-                    break;
-                case 3:
-                    juego.leerlogs();
-                    break;
-                case 4:
-                    juego.borrarlogs();
-                    break;
-                case 5:
-                    System.out.println("saliendo...");
-                    break;
-                default:
-                    System.out.println("opcion invalida");
+                case 1 -> juego.iniciarAleatorio(sc);
+                case 2 -> juego.iniciarManual(sc);
+                case 3 -> juego.leerLogs();
+                case 4 -> juego.borrarLogs();
             }
-        }
 
-        scanner.close();
+        } while (opcion != 5);
     }
 }
