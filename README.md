@@ -33,5 +33,4 @@ Cada raza puede tener ventajas sobre otra en combate.
 - El juego termina cuando un equipo queda sin personajes.
 
 
-## 📂 Estructura del proyecto
 
